@@ -2,7 +2,7 @@ name: Keep irccloud alive
 
 on:
   schedule:
-    - cron: '11 23 * * *'
+    - cron: '11 * * * *'
   repository_dispatch:
 
 jobs:
