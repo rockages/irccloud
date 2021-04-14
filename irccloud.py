@@ -68,7 +68,7 @@ class irccloud:
                    "Accept-Encoding" : "gzip,deflate,sdch",
                    "User-Agent" : "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.19 (KHTML, like Gecko) Chrome/1.0.154.53 Safari/525.19",
                    "Cookie": "session={0}".format(irccloud.SessionId),
-                   "Host":"www.irccloud.com"
+                   "Host":"api.irccloud.com"
         }
         r = requests.post(stream_url, headers = headers)
         if r.status_code == 200:
