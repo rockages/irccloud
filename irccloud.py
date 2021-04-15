@@ -1,7 +1,7 @@
 # A Simple script to keep an irc cloud client always alive 
 __author__ = "S Vijaikumar"
 __email__  = "vijai@vijaikumar.in"
-__copyright__ = "Copyright (C) 2019 S Vijai Kumar"
+__copyright__ = "Copyright (C) 2021 S Vijai Kumar & EliteOfGods"
 __license__ = "UNLICENSE"
 __version__ = "1.0"
 
@@ -10,6 +10,8 @@ import sys
 import traceback
 import logging
 from os import environ
+import json
+import random
 
 class irccloud:
     """
@@ -21,9 +23,10 @@ class irccloud:
     SessionId = ""
     KeepAliveToken = ""
 
-    def __init__(self, email, password):
+    def __init__(self, email, password, debug_mode=False):
         self.email = email
         self.password = password
+        self.debugging = debug_mode
         logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO)
         self.log = logging.getLogger(__name__)
 
@@ -31,6 +34,8 @@ class irccloud:
         url = "https://www.irccloud.com/chat/auth-formtoken"
         r = requests.post(url)
         response = r.json()
+        if self.debugging:
+            print(response)
         if response["success"]:
             self.log.info("Successfully obtained authentication token.")
             irccloud.AuthenticationToken = response["token"]
@@ -55,6 +60,8 @@ class irccloud:
             }
             r = requests.post(login_url, data = login_data, headers = headers)
             response = r.json()
+            if self.debugging:
+                print(response)
             if response["success"]:
                 self.log.info("Successfully obtained a session id.")
                 irccloud.SessionId = response["session"]
@@ -63,14 +70,20 @@ class irccloud:
                 irccloud.SessionId = "SESSION_FAILURE"
 
     def keep_alive(self):
+        ua_file = open("user_agents.json", "r+")
+        user_agents = json.load(ua_file)
+        ua_file.close()
+
         stream_url = "https://www.irccloud.com/chat/stream"
         headers = {"Connection" : "keep-alive",
                    "Accept-Encoding" : "gzip,deflate,sdch",
-                   "User-Agent" : "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.19 (KHTML, like Gecko) Chrome/1.0.154.53 Safari/525.19",
+                   "User-Agent" : random.choice(user_agents),
                    "Cookie": "session={0}".format(irccloud.SessionId),
                    "Host":"www.irccloud.com"
         }
         r = requests.post(stream_url, headers = headers)
+        if self.debugging:
+            print(r.json())
         if r.status_code == 200:
             irccloud.KeepAliveToken = "KA_ALIVE"
         else:
@@ -94,7 +107,8 @@ if __name__ == "__main__":
     try:
         email = environ.get("IRCCLOUD_USERNAME")
         password = environ.get("IRCCLOUD_PASSWORD")
-        irc = irccloud(email, password)
+        debug_mode = True
+        irc = irccloud(email, password, debug_mode)
         irc.runner()
     except KeyboardInterrupt:
         self.log.debug("Shutdown requested. Exiting script. Thank you :)")
