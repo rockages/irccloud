@@ -107,7 +107,7 @@ if __name__ == "__main__":
     try:
         email = environ.get("IRCCLOUD_USERNAME")
         password = environ.get("IRCCLOUD_PASSWORD")
-        debug_mode = false
+        debug_mode = False
         irc = irccloud(email, password, debug_mode)
         irc.runner()
     except KeyboardInterrupt:
