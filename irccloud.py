@@ -82,8 +82,8 @@ class irccloud:
                    "Host":"www.irccloud.com"
         }
         r = requests.post(stream_url, headers = headers)
-        if self.debugging:
-            print(r.json())
+        #if self.debugging:
+            #print(r.json())
         if r.status_code == 200:
             irccloud.KeepAliveToken = "KA_ALIVE"
         else:
