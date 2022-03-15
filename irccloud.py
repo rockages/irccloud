@@ -84,8 +84,8 @@ class irccloud:
         }
         while True:
             r = requests.post(stream_url, headers = headers)
-            #if self.debugging:	
-                #self.log.debug(r.json())
+            if self.debugging:	
+                self.log.debug(r.json())
             if r.status_code == 200:
                 irccloud.KeepAliveToken = "KA_ALIVE"
                 break
@@ -117,6 +117,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         self.log.debug("Shutdown requested. Exiting script. Thank you :)")
         sys.exit(0)
-    except Exception:
-        traceback.print_exc(file=sys.stdout)
-        sys.exit(0)
+    #except Exception:
+        #traceback.print_exc(file=sys.stdout)
+        #sys.exit(0)
