@@ -101,7 +101,7 @@ class irccloud:
                 self.log.info("IRC Cloud Session is Kept alive.")
             else:
                 self.log.error("IRC Cloud Session could not be Kept alive.")
-
+                sys.exit(1)
 
 if __name__ == "__main__":
     try:
