@@ -74,12 +74,12 @@ class irccloud:
         user_agents = json.load(ua_file)
         ua_file.close()
 
-        stream_url = "https://www.irccloud.com/chat/stream"
+        stream_url = "https://api.irccloud.com/chat/stream"
         headers = {"Connection" : "keep-alive",
                    "Accept-Encoding" : "gzip,deflate,sdch",
                    "User-Agent" : random.choice(user_agents),
                    "Cookie": "session={0}".format(irccloud.SessionId),
-                   "Host":"https://api.irccloud.com"
+                   "Host":"www.irccloud.com"
         }
         r = requests.post(stream_url, headers = headers)
         #if self.debugging:	
