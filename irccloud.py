@@ -79,7 +79,7 @@ class irccloud:
                    "Accept-Encoding" : "gzip,deflate,sdch",
                    "User-Agent" : random.choice(user_agents),
                    "Cookie": "session={0}".format(irccloud.SessionId),
-                   "Host":"www.irccloud.com"
+                   "Host":"api.irccloud.com"
         }
         r = requests.post(stream_url, headers = headers)
         if self.debugging:	
