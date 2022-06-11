@@ -12,7 +12,6 @@ import logging
 from os import environ
 import json
 import random
-from time import sleep
 
 class irccloud:
     """
@@ -82,15 +81,13 @@ class irccloud:
                    "Cookie": "session={0}".format(irccloud.SessionId),
                    "Host":"www.irccloud.com"
         }
-
-        while True:
-            r = requests.post(stream_url, headers = headers)
+        r = requests.post(stream_url, headers = headers)
             #if self.debugging:	
                 #self.log.debug(r.json())
-            if r.status_code == 200:
+        if r.status_code == 200:
                 irccloud.KeepAliveToken = "KA_ALIVE"
                 break
-            else:
+        else:
                 sleep(15)
                 #irccloud.KeepAliveToken = "KA_DEAD"
 
