@@ -118,5 +118,5 @@ if __name__ == "__main__":
         self.log.debug("Shutdown requested. Exiting script. Thank you :)")
         sys.exit(0)
     except Exception:
-        traceback.print_exc(file=sys.stdout)
+        #traceback.print_exc(file=sys.stdout)
         sys.exit(0)
