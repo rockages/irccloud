@@ -86,10 +86,8 @@ class irccloud:
                 #self.log.debug(r.json())
         if r.status_code == 200:
             irccloud.KeepAliveToken = "KA_ALIVE"
-            break
         else:
-            sleep(15)
-            #irccloud.KeepAliveToken = "KA_DEAD"
+            irccloud.KeepAliveToken = "KA_DEAD"
 
     def runner(self):
         self.get_session_id()
