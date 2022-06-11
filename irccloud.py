@@ -85,11 +85,11 @@ class irccloud:
             #if self.debugging:	
                 #self.log.debug(r.json())
         if r.status_code == 200:
-                irccloud.KeepAliveToken = "KA_ALIVE"
-                break
+            irccloud.KeepAliveToken = "KA_ALIVE"
+            break
         else:
-                sleep(15)
-                #irccloud.KeepAliveToken = "KA_DEAD"
+            sleep(15)
+            #irccloud.KeepAliveToken = "KA_DEAD"
 
     def runner(self):
         self.get_session_id()
@@ -116,5 +116,5 @@ if __name__ == "__main__":
         self.log.debug("Shutdown requested. Exiting script. Thank you :)")
         sys.exit(0)
     except Exception:
-        #traceback.print_exc(file=sys.stdout)
+        traceback.print_exc(file=sys.stdout)
         sys.exit(0)
