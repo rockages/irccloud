@@ -12,6 +12,7 @@ import logging
 from os import environ
 import json
 import random
+from time import sleep
 
 class irccloud:
     """
