@@ -81,6 +81,7 @@ class irccloud:
                    "Cookie": "session={0}".format(irccloud.SessionId),
                    "Host":"www.irccloud.com"
         }
+
         while True:
             r = requests.post(stream_url, headers = headers)
             #if self.debugging:	
